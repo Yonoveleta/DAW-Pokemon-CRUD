@@ -13,6 +13,14 @@ app.get("/", (req, res) => {
         {
             name: "Garchomp",
             types: ["Dragon", "Ground"]
+        },
+        {
+            name: "Pikachu",
+            types: ["Electric"]
+        },
+        {
+            name: "Infernape",
+            types: ["Fire", "Fight"]
         }
     ]
     res.render("pokemons", {pokemons: pokemons})

@@ -16,11 +16,12 @@
         <% pokemons.forEach(pokemon=> { %>
             <div class="pokemonContainer">
                 <h3><%= pokemon.name %></h3>
+                <img src="img/<%= pokemon.name %>.png">
                 <div class="typesContainer">
                     <h4>Types</h4>
                     <div class="types">
                     <% pokemon.types.forEach(type => { %>
-                        <p><%= type %></p>
+                        <p class="type"><%= type %></p>
                     <% }) %>
                     </div>
                 </div>
