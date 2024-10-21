@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Pokemons</title>
+    <meta charset="utf-8">
+
+    <!-- styles -->
+    <link href="styles/styles.css" rel="stylesheet">
+
+    <!-- scripts -->
+</head>
+
+<body>
+    <div id="pokemon-list">
+        <% pokemons.forEach(pokemon=> { %>
+            <div class="pokemonContainer">
+                <h3><%= pokemon.name %></h3>
+                <div class="typesContainer">
+                    <h4>Types</h4>
+                    <div class="types">
+                    <% pokemon.types.forEach(type => { %>
+                        <p><%= type %></p>
+                    <% }) %>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</body>
+
+</html>

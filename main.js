@@ -1,40 +1,23 @@
-window.onload = (event) => {
+let express = require("express")
+const path = require("path") 
 
-    pokemonList = document.getElementById("pokemon-list")
+let app = express()
+const PORT = 3000
 
-    getPokemons().forEach(pokemon => {
-        pokemonHTML = getPokemonHTML(pokemon)
-        pokemonList.appendChild(pokemonHTML)
-    })
+app.set("view engine", "ejs")
 
-    function getPokemonHTML(pokemon) {
-        pokemonContainer = document.createElement("div")
-        pokemonContainer.classList.add("pokemonContainer")
+app.use(express.static(path.join(__dirname, "public")))
 
-        // pokemon name
-        pokemonName = document.createElement("h3")
-        pokemonName.textContent = pokemon.name
+app.get("/", (req, res) => {
+    pokemons = [
+        {
+            name: "Garchomp",
+            types: ["Dragon", "Ground"]
+        }
+    ]
+    res.render("pokemons", {pokemons: pokemons})
+})
 
-        // pokemon types
-        typesContainer = document.createElement("div")
-        typesContainer.classList.add("typesContainer")
-        typeText = document.createElement("h4")
-        typeText.textContent = "Type"
-        typesContainer.appendChild(typeText)
-        let types = document.createElement("div")
-        types.classList.add("types")
-
-        pokemon.types.forEach(type => {
-            typeHTML = document.createElement("p")
-            typeHTML.textContent = type
-            types.appendChild(typeHTML)
-        })
-
-        typesContainer.appendChild(types)
-
-        pokemonContainer.appendChild(pokemonName)
-        pokemonContainer.appendChild(typesContainer)
-        return pokemonContainer
-    }
-
-}
+app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`)
+})
