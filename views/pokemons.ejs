@@ -7,13 +7,18 @@
 
     <!-- styles -->
     <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/types.css" rel="stylesheet">
 
     <!-- scripts -->
+     <script src="/scripts/https-requests.js"></script>
+
 </head>
 
 <body>
+    <%- include("nav") %>
+
     <div id="pokemon-list">
-        <% pokemons.forEach(pokemon=> { %>
+        <% pokemons.forEach(pokemon => { %>
             <div class="pokemonContainer">
                 <h3><%= pokemon.name %></h3>
                 <img src="img/<%= pokemon.name %>.png">
@@ -21,13 +26,56 @@
                     <h4>Types</h4>
                     <div class="types">
                     <% pokemon.types.forEach(type => { %>
-                        <p class="type"><%= type %></p>
+                        <p class="type <%= type %>"><%= type %></p>
                     <% }) %>
                     </div>
                 </div>
+
+                <button class="deletePokemon" onclick="deletePokemon('<%- pokemon._id %>')">&times;</button>
             </div>
         <% }) %>
     </div>
+
+    <div class="buttonContainer">
+        <button class="openModal addPokemon">Add pokemon</button>
+    </div>
+    
+    <div id="addPokemonModal" class="modal">
+
+        <div class="modalContent">
+            <span class="close">&times;</span>
+            <form action="/pokemon" method="post" enctype="multipart/form-data" class="verticalForm">
+                <div class="formGroup">
+                    <label for="name">Name: </label>
+                    <input id="name" type="text" name="name" placeholder="Name">
+                </div>
+                
+                <div class="formGroup">
+                    <label for="type">Type: </label>
+                    <input id="type" list="types" name="type" placeholder="Type">
+                </div>
+
+                <div class="formGroup">
+                    <label for="image">Image: </label>
+                    <input type="file" name="image" id="image" accept="image/png">
+                </div>
+
+                <div class="formButtons">
+                    <input type="submit" class="modalSubmit">
+                </div>
+               
+                <datalist id="types">
+                <% types.forEach(type => { %>
+                    <option value="<%= type %>"> 
+                <% }) %>
+                </datalist>
+            </form>
+        </div>
+      
+    </div>  
+
+    <!-- scripts -->
+    <script src="scripts/modal.js"></script>
 </body>
 
 </html>

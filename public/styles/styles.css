@@ -1,28 +1,83 @@
-html, body {
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* variables */
+:root {
+    --main-color: rgb(207, 67, 67);
+    --pokemon-background: #0075BE;
+    --pokemon-font: #FFCC00;
+}
+
+html,
+body {
     margin: 0;
 }
 
 body {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+}
+
+#pokemon-list::-webkit-scrollbar {
+    width: 15px;
+}
+
+#pokemon-list::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+}
+
+#pokemon-list::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 #pokemon-list {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    align-items: center;
+    width: 100%;
     margin: auto;
+    overflow-y: auto;
 }
 
-.pokemonContainer {
+nav {
+    font-family: 'Press Start 2P';
+    min-height: 60px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    background-color: var(--main-color);
+    position: sticky;
+    top: 0;
+    align-items: center;
 }
 
-.typesContainer, .types {
+.navOption {
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 10px;
+    height: 100%;
+    align-content: center;
+    flex-basis: 100px;
+    font-weight: bold;
+}
+
+.navOption:link, .navOption:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.navOption:hover {
+    background-color: var(--pokemon-background);
+    color: var(--pokemon-font);
+    font-weight: bolder;
+}
+
+.typesContainer,
+.types {
     display: flex;
     flex-direction: row;
 }
@@ -35,14 +90,121 @@ body {
 }
 
 .pokemonContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
     margin: 8px;
     border-radius: 8px;
     border-style: solid;
     align-items: center;
     background-color: rgb(231, 231, 231);
+    position: relative;
 }
 
 .pokemonContainer img {
     width: 200px;
     height: 200px;
+}
+
+.deletePokemon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: red;
+    border-radius: 4px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalContent {
+    margin: 15% auto;
+    padding: 20px;
+    width: 60%;
+    background-color: rgba(207, 67, 67, 0.9);
+    position: relative;
+}
+
+.verticalForm label {
+    font-family: 'Press Start 2P';
+    vertical-align: middle;
+}
+
+.verticalForm input:not([type="submit"]) {
+    height: 20px;
+    font-family: 'Press Start 2P';
+    box-shadow: inset 0 0 5px grey;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.verticalForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonContainer {
+    background-color: var(--main-color);
+    display: flex;
+    flex-direction: row;
+    min-height: 40px;
+    justify-content: center;
+}
+
+.buttonContainer>button {
+    margin: auto 10px;
+    height: 80%;
+}
+
+.formGroup, .formButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+button.openModal, .modalSubmit {
+    display: inline-block;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P';
+    font-weight: 400;
+    color: var(--pokemon-font);
+    background-color: var(--pokemon-background);
+    box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.17);
+    text-align: center;
+    position: relative;
+}
+
+.modalSubmit {
+    width: 100px;
+    height: 30px;
+}
+
+.openModal:active, .modalSubmit:active {
+    top: 0.1em;
 }
